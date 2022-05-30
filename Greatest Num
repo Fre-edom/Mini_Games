@@ -1,0 +1,99 @@
+---------------------------------------------------------- First attempt (works) --------------------------------------------------------------
+
+
+max_num = input( "Which number is the greatest? :")
+answer = input ("Oh you wanna know? ")
+def function(num1, num2, num3):
+    if num1 > num2 and num1 > num3:
+        return num1
+    elif num1 < num2 and num1 < num3 and num2 < num3:
+        return num3
+    else:
+        return num2
+
+print("Here it is : ")
+print(function(50,50000,99))
+
+
+
+
+---------------------------------------------------------- Second attempt ( works)  --------------------------------------------------------------
+
+
+
+max_num = input("Do you wanna know which number is the greatest? :")
+
+def game(num1,num2,num3):
+    if num1 > num2 and num1 > num3:
+        print("Here it is : " + str(num1))
+    elif num1 < num2 and num1 < num3 and num2 < num3:
+        print("Here it is : " + str(num3))
+    else:
+        print("Here it is : " + str(num2))
+
+
+if max_num != "No":
+    print("Awesome")
+    num1 = int(input("Please give me one number : "))
+    num2 = int(input("Please give me one more number : "))
+    num3 = int(input("And now the third : "))
+    game(num1,num2,num3)
+
+
+else:
+    print("Ook Byeeee! ")
+
+
+    
+    
+    
+    
+    
+---------------------------------------------------------- Third attempt (workds) --------------------------------------------------------------
+
+
+max_num = input( "Do you wanna know which number is the greatest? :")
+num1 = int(input ("Please give me one number : "))
+num2 = int(input ("Please give me one more number : "))
+num3 = int(input ("And now the third : "))
+
+
+if num1 > num2 and num1 > num3:
+    print("Here it is : " + str(num1))
+elif num1 < num2 and num1 < num3 and num2 < num3:
+    print("Here it is : " + str(num3))
+else:
+    print("Here it is : " + str(num2))
+
+
+
+---------------------------------------------------------- Fourth attempt (workds) --------------------------------------------------------------
+
+
+
+max_num = input("Do you wanna know which number is the greatest? :")
+
+def game(num1,num2,num3):
+    if num1 > num2 and num1 > num3:
+        print("Here it is : " + str(num1))
+    elif num1 < num2 and num1 < num3 and num2 < num3:
+        print("Here it is : " + str(num3))
+    else:
+        print("Here it is : " + str(num2))
+
+
+if max_num != "No":
+    print("Awesome")
+    try:
+        num1 = int(input("Please give me one number : "))
+        num2 = int(input("Please give me one more number : "))
+        num3 = int(input("And now the third : "))
+        game(num1, num2, num3)
+    except:
+        print("Invalid input, please try again later! ")
+
+else:
+    print("Ook Byeeee! ")
+
+
+
