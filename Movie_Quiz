@@ -1,0 +1,607 @@
+---------------------------------------------- First attempt with errors ------------------------------------------------------------------------------------------
+
+print("Hey there!")
+n = str.title(input("What is your name? "))
+print("Nice to meet you " + n)
+
+q = input("Do you wanna play a game? ")
+answers = ["Yes", "Sure", "Ok", "Yei", "Yep", "Why not", "sure", "ok", "ook", "why not", "sure", "yes", "yep"]
+
+instructions = "I am going to ask you 3 questions.\nFor every correct question you get 1 point.\nIf you score more " \
+               "than 2, you get a heart!\nIf you score less than 2, you still get a heart...\ncoz.. why not? "
+
+
+if q in answers:
+    print("Awesome! Let's play! ")
+    print("So... ")
+    print(instructions)
+else:
+    print("Oh... ok! Maybe another time. ")
+    quit()
+
+print("There are 3 categories with 3 questions each: Director, Actor and Actress ")
+categories = input("Please choose:\nA for Director\nB for Actor\nand C for Actress\nWhich one do you prefer? ")
+
+# ans1 = input("Who is the director of the movie \" Quills\"? ")
+# ans2 = input("Who is the director of the movie \" Mystery Train\"? ")
+# ans3 = input("Who is the director of the movie\" Dogville\"? ")
+
+ans1_3 = {"Who is the director of the movie \" Quills\"? ": ["Philip Kaufman", "3"],
+          "Who is the director of the movie \" Mystery Train\"? ": ["Jim Jarmusch", "2"],
+          "Who is the director of the movie\" Dogville\"? ": ["Lars von Trier", "3"]}
+
+opt1_3 = [["1) Tim Burton", "2) David Fincher", "3) Philip Kaufman"],
+          ["1) Lars von Trier", "2) Jim Jarmusch", "3) Luis Buñuel"],
+          ["1) Jean-Pierre Jeunet", "2) Pedro Almodóvar", "3) Lars von Trier"]]
+# "Philip Kaufman"
+# "Jim Jarmusch"
+# "Lars von Trier"
+
+# ans4 = input("Who is the main actor in the movie \" What's Eating Gilbert Grape\"? ")
+# ans5 = input("Who is the main actor in the movie \" Fight Club\"? ")
+# ans6 = input("Who is the main actor in the movie \" Django Unchained\"? ")
+
+ans4_6 = {"Who is the main actor in the movie \" What's Eating Gilbert Grape\"? ": ["Johnny Depp", "2"],
+          "Who is the main actor in the movie \" Fight Club\"?": ["Edward Norton", "1"],
+          "Who is the main actor in the movie \" Django Unchained\"?": ["Jamie Foxx", "3"]}
+
+opt4_6 = [["1) Brad Pitt", "2) Johnny Depp", "3) Ian McKellen"],
+          ["1) Edward Norton", "2) Viggo Mortensen", "3) Sean Bean"],
+          ["1) Leonardo DiCaprio", "2) Matthew McConaughey", "3) Jamie Foxx"]]
+
+# "Johnny Depp"
+# "Edward Norton"
+# "Jamie Foxx"
+
+
+# ans7 = input("Who is the main actress in the movie \" Sweeney Todd: The Demon Barber of Fleet Street\"? ")
+# ans8 = input("Who is the main actress in the movie \" La Vie en Rose\"? ")
+# ans9 = input("Who is the main actress in the movie \" Nymphomaniac vol:I & II \"? ")
+
+ans7_9 = {"Who is the main actress in the movie \" Sweeney Todd: The Demon Barber of Fleet Street\"?": ["Helena Bonham "
+                                                                                                        "Carter", "2"],
+          "Who is the main actress in the movie \" La Vie en Rose\"? ": ["Marion Cotillard", "1"],
+          "Who is the main actress in the movie \"Nymphomaniac vol:I & II \"?": ["Charlotte Gainsbourg", "3"]}
+
+opt7_9 = [["1) Léa Seydoux", "2) Helena Bonham Carter", "3) Adèle Exarchopoulos"],
+          ["1) Marion Cotillard", "2) Audrey Tautou", "3) Tilda Swinton"],
+          ["1) Uma Thurman", "2) Penélope Cruz", "3) Charlotte Gainsbourg"]]
+
+
+# "Helena Bonham Carter"
+# "Marion Cotillard"
+# "Charlotte Gainsbourg"
+
+#---------------------------------------------------------------------------------------------------------------------
+
+def game1():
+    guesses = []
+    correct_ans = 0
+    q_count = 1
+
+    for ans in ans1_3:
+        print(ans)
+        for opt in opt1_3[q_count - 1]:
+            print(opt)
+        guess = input("Enter answer: ")
+        guess = guess.upper()
+        guesses.append(guess)
+
+        correct_ans += check_ans(ans1_3.get(ans), guess)
+        q_count += 1
+
+    the_score(correct_ans, guesses)
+
+
+def game2():
+    guesses = []
+    correct_ans = 0
+    q_count = 1
+
+    for ans in ans4_6:
+        print(ans)
+        for opt in opt4_6[q_count - 1]:
+            print(opt)
+        guess = input("Enter answer: ")
+        guess = guess.upper()
+        guesses.append(guess)
+
+        correct_ans += check_ans(ans4_6.get(ans), guess)
+        q_count += 1
+
+    the_score(correct_ans, guesses)
+
+
+def game3():
+    guesses = []
+    correct_ans = 0
+    q_count = 1
+
+    for ans in ans7_9:
+        print(ans)
+        for opt in opt7_9[q_count - 1]:
+            print(opt)
+        guess = input("Enter answer: ")
+        guess = guess.upper()
+        guesses.append(guess)
+
+        correct_ans += check_ans(ans7_9.get(ans), guess)
+        q_count += 1
+
+    the_score(correct_ans, guesses)
+
+
+def check_ans(ans, guess):
+    if ans == guess:
+        print("Yeii! That's correct!")
+        return 1
+    else:
+        print("Oh no, that is not correct.")
+        return 0
+
+
+def the_score(correct_ans, guesses):
+    print("Your score: ")
+    print("Answers: ", end=" ")
+    for i in ans1_3 or ans4_6 or ans7_9:
+        print(ans1_3.get(i), end=" ")
+    print()
+
+    print("Guesses: ", end=" ")
+    for i in guesses:
+        print(i, end=" ")
+        print()
+    the_score = int((correct_ans / (len(ans1_3) or len(ans4_6) or len(ans7_9))) * 100)
+    print("You scored " + str(the_score) + "%")
+
+
+def choose_again():
+    response = input("Wanna play again? ")
+    response = response.upper()
+    if response in answers:
+        return True
+    else:
+        return False
+
+
+def games():
+    print(categories)
+    if categories == "A":
+        game1()
+        choose_again()
+    elif categories == "B":
+        game2()
+        choose_again()
+    elif categories == "C":
+        game3()
+        choose_again()
+    else:
+        print("Invalid Category")
+    choose_again()
+
+
+games()
+
+while choose_again():
+    games()
+
+print("Thaaank you! Bye!")
+
+
+
+---------------------------------------------- Second attempt with errors ------------------------------------------------------------------------------------------
+
+print("Hey there!")
+n = str.title(input("What is your name? "))
+print("Nice to meet you " + n)
+
+q = input("Do you wanna play a game? ")
+answers = ["Yes", "Sure", "Ok", "Yei", "Yep", "Why not", "sure", "ok", "ook", "why not", "sure", "yes", "yep"]
+
+instructions = "I am going to ask you 3 questions.\nFor every correct question you get 1 point.\nIf you score more " \
+               "than 2, you get a heart!\nIf you score less than 2, you still get a heart...\ncoz.. why not? "
+
+
+if q in answers:
+    print("Awesome! Let's play! ")
+    print("So... ")
+    print(instructions)
+else:
+    print("Oh... ok! Maybe another time. ")
+    quit()
+
+print("There are 3 categories with 3 questions each: Director, Actor and Actress ")
+categories = input("Please choose:\nA for Director\nB for Actor\nand C for Actress\nWhich one do you prefer? ")
+
+# ans1 = input("Who is the director of the movie \" Quills\"? ")
+# ans2 = input("Who is the director of the movie \" Mystery Train\"? ")
+# ans3 = input("Who is the director of the movie\" Dogville\"? ")
+
+ans1_3 = {"Who is the director of the movie \" Quills\"? ": ["Philip Kaufman", "3"],
+          "Who is the director of the movie \" Mystery Train\"? ": ["Jim Jarmusch", "2"],
+          "Who is the director of the movie\" Dogville\"? ": ["Lars von Trier", "3"]}
+
+opt1_3 = [["1) Tim Burton", "2) David Fincher", "3) Philip Kaufman"],
+          ["1) Lars von Trier", "2) Jim Jarmusch", "3) Luis Buñuel"],
+          ["1) Jean-Pierre Jeunet", "2) Pedro Almodóvar", "3) Lars von Trier"]]
+# "Philip Kaufman"
+# "Jim Jarmusch"
+# "Lars von Trier"
+
+# ans4 = input("Who is the main actor in the movie \" What's Eating Gilbert Grape\"? ")
+# ans5 = input("Who is the main actor in the movie \" Fight Club\"? ")
+# ans6 = input("Who is the main actor in the movie \" Django Unchained\"? ")
+
+ans4_6 = {"Who is the main actor in the movie \" What's Eating Gilbert Grape\"? ": ["Johnny Depp", "2"],
+          "Who is the main actor in the movie \" Fight Club\"?": ["Edward Norton", "1"],
+          "Who is the main actor in the movie \" Django Unchained\"?": ["Jamie Foxx", "3"]}
+
+opt4_6 = [["1) Brad Pitt", "2) Johnny Depp", "3) Ian McKellen"],
+          ["1) Edward Norton", "2) Viggo Mortensen", "3) Sean Bean"],
+          ["1) Leonardo DiCaprio", "2) Matthew McConaughey", "3) Jamie Foxx"]]
+
+# "Johnny Depp"
+# "Edward Norton"
+# "Jamie Foxx"
+
+
+# ans7 = input("Who is the main actress in the movie \" Sweeney Todd: The Demon Barber of Fleet Street\"? ")
+# ans8 = input("Who is the main actress in the movie \" La Vie en Rose\"? ")
+# ans9 = input("Who is the main actress in the movie \" Nymphomaniac vol:I & II \"? ")
+
+ans7_9 = {"Who is the main actress in the movie \" Sweeney Todd: The Demon Barber of Fleet Street\"?": ["Helena Bonham "
+                                                                                                        "Carter", "2"],
+          "Who is the main actress in the movie \" La Vie en Rose\"? ": ["Marion Cotillard", "1"],
+          "Who is the main actress in the movie \"Nymphomaniac vol:I & II \"?": ["Charlotte Gainsbourg", "3"]}
+
+opt7_9 = [["1) Léa Seydoux", "2) Helena Bonham Carter", "3) Adèle Exarchopoulos"],
+          ["1) Marion Cotillard", "2) Audrey Tautou", "3) Tilda Swinton"],
+          ["1) Uma Thurman", "2) Penélope Cruz", "3) Charlotte Gainsbourg"]]
+
+
+# "Helena Bonham Carter"
+# "Marion Cotillard"
+# "Charlotte Gainsbourg"
+
+heart = "        **                    **          \n       *            *            *\n          *                     *\n            *               *     \n                    *         "
+
+#---------------------------------------------------------------------------------------------------------------------
+
+def game1():
+    guesses = []
+    correct_ans = 0
+    q_count = 1
+
+    for ans in ans1_3:
+        print(ans)
+        for opt in opt1_3[q_count - 1]:
+            print(opt)
+        guess = input("Enter answer: ")
+        guess = guess.upper()
+        guesses.append(guess)
+
+        correct_ans += check_ans(ans1_3.get(ans), guess)
+        q_count += 1
+    print("You win!! \nHere! Take a heart: ")
+    print(heart)
+
+
+def game2():
+    guesses = []
+    correct_ans = 0
+    q_count = 1
+
+    for ans in ans4_6:
+        print(ans)
+        for opt in opt4_6[q_count - 1]:
+            print(opt)
+        guess = input("Enter answer: ")
+        guess = guess.upper()
+        guesses.append(guess)
+
+        correct_ans += check_ans(ans4_6.get(ans), guess)
+        q_count += 1
+    print("You win!! \nHere! Take a heart: ")
+    print(heart)
+
+
+def game3():
+    guesses = []
+    correct_ans = 0
+    q_count = 1
+
+    for ans in ans7_9:
+        print(ans)
+        for opt in opt7_9[q_count - 1]:
+            print(opt)
+        guess = input("Enter answer: ")
+        guess = guess.upper()
+        guesses.append(guess)
+
+        correct_ans += check_ans(ans7_9.get(ans), guess)
+        q_count += 1
+    print("You win!! \nHere! Take a heart: ")
+    print(heart)
+
+
+def check_ans(correct_ans, guess):
+    if correct_ans == guess:
+        print("Yeii! That's correct!")
+        return 1
+    else:
+        print("Oh no, that is not correct.")
+        return 0
+
+
+def the_score(correct_ans, guesses):
+    print("Your score: ")
+    print("Correct answers: ", end=" ")
+    for i in ans1_3 or ans4_6 or ans7_9:
+        print(ans1_3.get(i), end=" ")
+    print()
+
+    print("Guesses: ", end=" ")
+    for i in guesses:
+        print(i, end=" ")
+        print()
+    the_score = int((correct_ans / (len(ans1_3) or len(ans4_6) or len(ans7_9))) * 100)
+    print("You scored " + str(the_score) + "%")
+
+
+def choose_again():
+    response = input("Wanna play again? ")
+    response = response.upper()
+    while response in answers:
+        return True
+    else:
+        return False
+
+
+def games():
+    print(categories)
+    if categories == "A":
+        game1()
+        choose_again()
+    elif categories == "B":
+        game2()
+        choose_again()
+    elif categories == "C":
+        game3()
+        choose_again()
+    else:
+        print("Invalid Category")
+    choose_again()
+
+
+games()
+
+while choose_again() in answers:
+    games()
+
+print("Thaaank you! Bye!")
+
+
+
+---------------------------------------------- Third attempt with help ------------------------------------------------------------------------------------------
+
+
+print("Hey there!")
+n = str.title(input("What is your name? "))
+print("Nice to meet you " + n)
+
+q = input("Do you wanna play a game? ")
+answers = ["Yes", "Sure", "Ok", "Yei", "Yep", "Why not", "sure", "ok", "ook", "why not", "sure", "yes", "yep"]
+
+instructions = "I am going to ask you 3 questions.\nFor every correct question you get 1 point.\nIf you score more " \
+               "than 2, you get a heart!\nIf you score less than 2, you still get a heart...\ncoz.. why not? "
+
+
+flag = 0
+
+if q in answers:
+    print("Awesome! Let's play! ")
+    print("So... ")
+    print(instructions)
+    #games()
+    flag = 1
+else:
+    print("Oh... ok! Maybe another time. ")
+    quit()
+
+print("There are 3 categories with 3 questions each: Director, Actor and Actress ")
+categories = input("Please choose:\nA for Director\nB for Actor\nand C for Actress\nWhich one do you prefer? ")
+
+# ans1 = input("Who is the director of the movie \" Quills\"? ")
+# ans2 = input("Who is the director of the movie \" Mystery Train\"? ")
+# ans3 = input("Who is the director of the movie\" Dogville\"? ")
+
+ans1_3 = {"Who is the director of the movie \" Quills\"? ": ["Philip Kaufman", "3"],
+          "Who is the director of the movie \" Mystery Train\"? ": ["Jim Jarmusch", "2"],
+          "Who is the director of the movie\" Dogville\"? ": ["Lars von Trier", "3"]}
+
+opt1_3 = [["1) Tim Burton", "2) David Fincher", "3) Philip Kaufman"],
+          ["1) Lars von Trier", "2) Jim Jarmusch", "3) Luis Buñuel"],
+          ["1) Jean-Pierre Jeunet", "2) Pedro Almodóvar", "3) Lars von Trier"]]
+# "Philip Kaufman"
+# "Jim Jarmusch"
+# "Lars von Trier"
+
+# ans4 = input("Who is the main actor in the movie \" What's Eating Gilbert Grape\"? ")
+# ans5 = input("Who is the main actor in the movie \" Fight Club\"? ")
+# ans6 = input("Who is the main actor in the movie \" Django Unchained\"? ")
+
+ans4_6 = {"Who is the main actor in the movie \" What's Eating Gilbert Grape\"? ": ["Johnny Depp", "2"],
+          "Who is the main actor in the movie \" Fight Club\"?": ["Edward Norton", "1"],
+          "Who is the main actor in the movie \" Django Unchained\"?": ["Jamie Foxx", "3"]}
+
+opt4_6 = [["1) Brad Pitt", "2) Johnny Depp", "3) Ian McKellen"],
+          ["1) Edward Norton", "2) Viggo Mortensen", "3) Sean Bean"],
+          ["1) Leonardo DiCaprio", "2) Matthew McConaughey", "3) Jamie Foxx"]]
+
+# "Johnny Depp"
+# "Edward Norton"
+# "Jamie Foxx"
+
+
+# ans7 = input("Who is the main actress in the movie \" Sweeney Todd: The Demon Barber of Fleet Street\"? ")
+# ans8 = input("Who is the main actress in the movie \" La Vie en Rose\"? ")
+# ans9 = input("Who is the main actress in the movie \" Nymphomaniac vol:I & II \"? ")
+
+ans7_9 = {"Who is the main actress in the movie \" Sweeney Todd: The Demon Barber of Fleet Street\"?": ["Helena Bonham "
+                                                                                                        "Carter", "2"],
+          "Who is the main actress in the movie \" La Vie en Rose\"? ": ["Marion Cotillard", "1"],
+          "Who is the main actress in the movie \"Nymphomaniac vol:I & II \"?": ["Charlotte Gainsbourg", "3"]}
+
+opt7_9 = [["1) Léa Seydoux", "2) Helena Bonham Carter", "3) Adèle Exarchopoulos"],
+          ["1) Marion Cotillard", "2) Audrey Tautou", "3) Tilda Swinton"],
+          ["1) Uma Thurman", "2) Penélope Cruz", "3) Charlotte Gainsbourg"]]
+
+
+# "Helena Bonham Carter"
+# "Marion Cotillard"
+# "Charlotte Gainsbourg"
+
+#---------------------------------------------------------------------------------------------------------------------
+
+def game1():
+    guesses = []
+    correct_ans = 0
+    q_count = 1
+
+    for ans in ans1_3:
+        print(ans)
+        for opt in opt1_3[q_count - 1]:
+            print(opt)
+        guess = input("Enter answer: ")
+        guess = guess.lower()
+        guesses.append(guess)
+
+        correct_ans += check_ans(ans1_3.get(ans), guess)
+        q_count += 1
+
+    the_score(correct_ans, guesses)
+
+
+def game2():
+    guesses = []
+    correct_ans = 0
+    q_count = 1
+
+    for ans in ans4_6:
+        print(ans)
+        for opt in opt4_6[q_count - 1]:
+            print(opt)
+        guess = input("Enter answer: ")
+        guess = guess.lower()
+        guesses.append(guess)
+
+        correct_ans += check_ans(ans4_6.get(ans), guess)
+        q_count += 1
+
+    the_score(correct_ans, guesses)
+
+
+def game3():
+    guesses = []
+    correct_ans = 0
+    q_count = 1
+
+    for ans in ans7_9:
+        print(ans)
+        for opt in opt7_9[q_count - 1]:
+            print(opt)
+        guess = input("Enter answer: ")
+        guess = guess.lower()
+        guesses.append(guess)
+
+        correct_ans += check_ans(ans7_9.get(ans), guess)
+        q_count += 1
+
+    the_score(correct_ans, guesses)
+
+
+def check_ans(ans, guess):
+    ans_temp = [val.lower() for val in ans]
+    if guess in ans_temp:
+        print("Yeii! That's correct!")
+        return 1
+    else:
+        print("Oh no, that is not correct.")
+        return 0
+
+
+def the_score(correct_ans, guesses):
+    print("Your score: ")
+    print("Answers: ", end=" ")
+    for i in ans1_3 or ans4_6 or ans7_9:
+        print(ans1_3.get(i), end=" ")
+    print('\n')
+
+    print("Guesses: ", end=" ")
+    for i in guesses:
+        print(i, end=" ")
+        #print()
+    the_score = int((correct_ans / (len(ans1_3) or len(ans4_6) or len(ans7_9))) * 100)
+    print("You scored " + str(the_score) + "%")
+
+
+def choose_again():
+    response = input("Wanna play again? ")
+    if response in answers:
+        global flag
+        flag = 1
+        return True
+    else:
+        return False
+
+x = 1
+
+def games():
+    global categories
+    global flag
+    if flag == 0:
+        print(categories)
+        if categories == "A":
+            game1()
+            #choose_again()
+        elif categories == "B":
+            game2()
+            #choose_again()
+        elif categories == "C":
+            game3()
+            #choose_again()
+        else:
+            print("Invalid Category")
+    else:
+        categories = input("Please choose:\nA for Director\nB for Actor\nand C for Actress\nWhich one do you prefer? ")
+        print(categories)
+        if categories == "A":
+            game1()
+            #choose_again()
+        elif categories == "B":
+            game2()
+            #choose_again()
+        elif categories == "C":
+            game3()
+            #choose_again()
+        else:
+            print("Invalid Category")
+    #choose_again()
+
+
+
+
+
+if flag == 1:
+    flag = 0
+    games()
+    
+    
+while choose_again():
+    games()
+    
+
+
+
+
+print("Thaaank you! Bye! ❤❤❤")
