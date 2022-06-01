@@ -1,1 +1,35 @@
 
+import random
+
+# Ask Guru game
+
+print("Ask Guru any question and you shall receive an answer  ")
+print("If you wish to quit just print \"Stop\"")
+
+ask = input("What do you want to ask Guru?    ")
+
+
+def ask_guru():
+    pass
+
+
+while ask.title() != "Stop":
+    ask_guru()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
