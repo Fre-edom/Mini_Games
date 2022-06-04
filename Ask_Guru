@@ -1,36 +1,17 @@
-------------------------------------------------- First attempt (works)  --------------------------------------------------------------------------------------------------------
-
-
+# Ask Guru game
 
 import random
 from Greek_sayings import Gs
 
 
-# Ask Guru game
-
 print("Ask Guru any question and you shall receive an answer  ")
 print("If you wish to quit just type: \"Stop\"")
 
-#def ask():
-   #input("What is your question for Guru?    ")
+#-----------------------------------------------------------------------------------------------------------------------------------#
 
-
-'''def ask_guru():
-    def ask():
-        input("What is your question for Guru?    ")
-     if ask.title() == "Stop":
-         print("Hope you have an amazing rest of the day... Bye for now! ")
-        quit()
-#else:
-    #while ask.title() != "Stop":
-        #ask_guru()
-                      '''
-
-#while ask.title() != "Stop":
-   # ask_guru()
 
 def ask_Guru():
-    ask = input("What is your question for Guru?   ")
+    ask = input("What is your question for Guru?   ")     
     if ask.title() == "Stop":
         print("Hope you have an amazing rest of the day... Bye for now! ")
         quit()
@@ -38,21 +19,12 @@ def ask_Guru():
       #  while ask.title() != "Stop":
         print(random.choice(Gs))
 
-ask_Guru()        #
-    
-    
-------------------------------------------------- Second attempt (works) added play again --------------------------------------------------------------------------------------------------------
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+def play_again():
+    ask = input("Do you want to keep asking questions?\nIf yes, go ahead and ask, if not just time Stop or No.    ")
+    while ask.title()  != "Stop" or "No" or "Nope":
+        ask_Guru()
+
+
+
+ask_Guru()
+play_again()
