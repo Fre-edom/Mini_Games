@@ -20,7 +20,7 @@ def ask_Guru():
         print(random.choice(Gs))
 
 def play_again():
-    ask = input("Do you want to keep asking questions?\nIf yes, go ahead and ask, if not just time Stop or No.    ")
+    ask = input("Do you want to keep asking questions?\nIf yes, go ahead and ask, if not just type Stop or No.    ")
     while ask.title()  != "Stop" or "No" or "Nope":
         ask_Guru()
 
