@@ -8,6 +8,7 @@ pygame.display.set_caption("Untitled")
 pygame_icon = pygame.image.load("C:\\Users\\elevl\\PycharmProjects\\pythonProject1\\game_pics\\icon.PNG")
 pygame.display.set_icon(pygame_icon)
 clock = pygame.time.Clock()
+game_active = True
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -24,6 +25,8 @@ max_enemy_rect = max_enemy.get_rect(topleft = (60, 700))
 hero = pygame.image.load("C:\\Users\\elevl\\PycharmProjects\\pythonProject1\\game_pics\\heros\\lizard.PNG").convert_alpha()
 hero_rect = hero.get_rect(topleft = ( 275, 680))
 
+hero_grav = 0
+
 
 run = True
 
@@ -32,30 +35,52 @@ while run:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-        if event.type == pygame.MOUSEMOTION:
-            print(event.pos)
 
-    screen.blit(background, (0, 0))
-    pygame.draw.rect(screen, "#39e0e3", score_rect)
-    pygame.draw.rect(screen, "#39e0e3", score_rect,10)
-   # pygame.draw.line(screen,"Black",(0,0), (1000,800), 10)
+        if game_active:
+            if event.type == pygame.MOUSEMOTION and hero_rect.bottom >= 700:
+                if hero_rect.collidepoint(event.pos): hero_grav = -30
+            if event.type == pygame.KEYDOWN and hero_rect.bottom >= 700:
+                if event.key == pygame.K_SPACE:
+                    hero_grav = -30
 
-    screen.blit(score_surf, score_rect)
+        else:
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                game_active = True
+                enemy1_rect.left = 800
+             
+    if game_active:
+        screen.blit(background, (0, 0))
+        pygame.draw.rect(screen, "#39e0e3", score_rect)
+        pygame.draw.rect(screen, "#39e0e3", score_rect,10)
+       # pygame.draw.line(screen,"Black",(0,0), (1000,800), 10)
 
-    enemy1_rect.x -= 4
-    if enemy1_rect.right <= 0: enemy1_rect.left = 1000
-    screen.blit(enemy1, enemy1_rect)
-    screen.blit(max_enemy, max_enemy_rect)
-    screen.blit(hero, hero_rect)
+        screen.blit(score_surf, score_rect)
+
+        enemy1_rect.x -= 4
+        if enemy1_rect.right <= 0: enemy1_rect.left = 1000
+        screen.blit(enemy1, enemy1_rect)
+        screen.blit(max_enemy, max_enemy_rect)
+
+
+        hero_grav += 1
+        hero_rect.y += hero_grav
+        if hero_rect.bottom >= 700: hero_rect.bottom = 700
+        screen.blit(hero, hero_rect)
+
+        if enemy1_rect.colliderect(hero_rect) or max_enemy_rect.colliderect(hero_rect):
+            game_active = False
+
+    else:
+        screen.fill("Yellow")
 
     #if hero_rect.collidedictall(enemy1_rect):
 
     # if hero_rect.collidedict(max_enemy_rect):
     #     print("collision")
 
-    mouse_pos = pygame.mouse.get_pos()
-    if hero_rect.collidepoint(mouse_pos):
-        pygame.mouse.get_pressed()
+    # mouse_pos = pygame.mouse.get_pos()
+    # if hero_rect.collidepoint(mouse_pos):
+    #     pygame.mouse.get_pressed()
 
 
         
